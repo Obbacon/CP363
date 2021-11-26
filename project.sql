@@ -1,5 +1,4 @@
-CREATE DATABASE StudentDatabase;
-
+CREATE DATABASE student_database;
 CREATE TABLE Student(
 	student_number int NOT NULL,
 	name varchar(50) NOT NULL,
@@ -10,7 +9,7 @@ CREATE TABLE Student(
 	GPA  varchar(5) NOT NULL,
 	Num_required_credits int NOT NULL,
 	Num_credits_taken int NOT NULL,
-
+	International_Student varchar(10) NOT NULL,
 	PRIMARY KEY (student_number)
 );
 
@@ -39,7 +38,11 @@ CREATE TABLE Minor (
 );
 
 CREATE TABLE Scholarship (
-
+	Scholarship_id int NOT NULL;
+	Scholarship_name varchar(100),
+	Amount int,
+	PRIMARY KEY (Scholarship_id),
+	FOREIGN KEY (student_number) REFERENCES Student(student_number)
 );
 
 INSERT INTO Student(student_number, name, address, email, phone_number, admission_year, GPA, Num_required_credits, Num_credits_taken)
@@ -50,3 +53,11 @@ VALUES (123456789, 'Dan', '4 Kitchener road', 'coolEmail@hotmail.com', '519-659-
 
 INSERT INTO Student(student_number, name, address, email, phone_number, admission_year, GPA, Num_required_credits, Num_credits_taken)
 VALUES (615412191, 'Stephen', '77 Guelph St', 'hello6543@gmail.com', '519-432-1111', 4, 'A+', 15, 14);
+
+ALTER TABLE student ADD International_Student varchar(10);
+
+INSERT INTO Student(student_number, name, address, email, phone_number, admission_year, GPA, Num_required_credits, Num_credits_taken)
+VALUES (543231099, 'Bill', '2 Waterloo St', 'harfc321@gmail.com', '519-333-9102', 1, 'A', 20, 1);
+
+INSERT INTO Student(student_number, name, address, email, phone_number, admission_year, GPA, Num_required_credits, Num_credits_taken)
+VALUES (541010101, 'Katelyn', '79 Lancaster St', 'SQLISCOOL@live.ca', '519-319-9321', 2, 'D', 20, 9);
