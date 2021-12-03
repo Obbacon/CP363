@@ -286,6 +286,27 @@ VALUES (8, 4350, 'Academic',1345.60, 120946754);
 
 -- SAMPLE TEST CASES:
 
+-- With Case 2: 
+With count_sales
+AS 
+(SELECT
+	
+	COUNT() as Orders,
+	
+FROM
+GROUP BY
+
+-- 2nd 
+s
+AS
+(SELECT * 
+FROM f
+WHERE f
+
+-- Query using
+
+---------------------
+
 -- With Case: Find average OSAP Payout
 WITH temp AS 
 	(SELECT 
@@ -302,3 +323,5 @@ FROM Student
 INNER JOIN Major
 ON Student.Student_number=Major.Student_number
 WHERE Major = 'Computer Science' AND GPA >= 9;
+
+
