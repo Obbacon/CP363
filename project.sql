@@ -7,7 +7,7 @@ CREATE TABLE Student(
 	Full_name varchar(50) NOT NULL,
 	Address varchar(50) NOT NULL,
 	Email varchar(50) NOT NULL,
-	Phone_number varchar(50) NOT NULL UNIQUE, 
+	Phone_number varchar(50) NOT NULL, 
 	Admission_year int NOT NULL,
 	GPA float NOT NULL,
 	Num_credits_taken int NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE Courses (
 	Professor varchar(50) NOT NULL,
 	Student_number int NOT NULL,	
 	PRIMARY KEY (Course_id),
-	FOREIGN KEY (Student_number) REFERENCES Student(Student_number)
+	FOREIGN KEY (Student_number) REFERENCES Student(student_number)
 );
 
 
@@ -284,44 +284,55 @@ INSERT INTO Financial(Financial_id, Scholarship_Amount, Scholarship_Type, OSAP, 
 VALUES (8, 4350, 'Academic',1345.60, 120946754);
 
 
+
+
+
+
+
 -- SAMPLE TEST CASES:
-
--- With Case 2: 
-With count_sales
-AS 
-(SELECT
-	
-	COUNT() as Orders,
-	
-FROM
-GROUP BY
-
--- 2nd 
-s
-AS
-(SELECT * 
-FROM f
-WHERE f
-
--- Query using
 
 ---------------------
 
--- With Case: Find average OSAP Payout
+-- Case 1:
+
 WITH temp AS 
 	(SELECT 
-		SUM(OSAP) as TOTAL
+	SUM(OSAP) as TOTAL
 	FROM Financial
 	GROUP BY Financial_id)
 	SELECT 
-		AVG(TOTAL) average
+	AVG(TOTAL) average
 	FROM temp;
 
--- Inner join test
+
+-- Case 2:
+
 SELECT Major.Major_id, Student.Full_name, Student.GPA
 FROM Student
 INNER JOIN Major
 ON Student.Student_number=Major.Student_number
 WHERE Major = 'Computer Science' AND GPA >= 9;
 
+
+-- Case 3:
+SELECT Student_number, Full_name, Email, Admission_year, GPA, International_Student, Major, Minor, Scholarship_amount, Scholarship_Type, OSAP
+FROM (SELECT Student_number, Major, Minor, Scholarship_Amount, Scholarship_Type, OSAP
+FROM Major natural join Minor natural join Financial
+WHERE minor.Student_number = '120946754') as x natural join Student natural join Courses
+WHERE student.Full_name = 'Allen Walker' AND student.Student_number = '120946754';
+
+-- Case 4:
+
+SELECT Major.Major, Major.COOP, Student.Full_name, Student.GPA
+FROM Major
+INNER JOIN Student 
+ON Student.Student_number=Major.Student_number
+WHERE Full_name Like 'a%' OR Full_name Like 'c%';
+
+-- Case 5:
+
+SELECT COUNT(Scholarship_Amount) as Scholarships , Scholarship_Type
+FROM Financial 
+GROUP BY Scholarship_Type
+ORDER BY Scholarships DESC;
 
