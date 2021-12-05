@@ -294,14 +294,12 @@ VALUES (8, 4350, 'Academic',1345.60, 120946754);
 ---------------------
 
 -- Case 1:
-
-WITH temp AS 
-	(SELECT 
-	SUM(OSAP) as TOTAL
-	FROM Financial
+	
+WITH temp AS (SELECT SUM(OSAP) AS TOTAL
+	FROM Financial natural join Student
+	WHERE International_Student = 0
 	GROUP BY Financial_id)
-	SELECT 
-	AVG(TOTAL) average
+	SELECT DISTINCT AVG(TOTAL) average
 	FROM temp;
 
 
